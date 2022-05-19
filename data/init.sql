@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS ciraconfigs(
   mps_root_certificate text, 
   proxydetails text,
   tenant_id varchar(36) NOT NULL,
+  version text,
   PRIMARY KEY (cira_config_name, tenant_id)
 );
 CREATE TABLE IF NOT EXISTS wirelessconfigs(
@@ -29,6 +30,7 @@ CREATE TABLE IF NOT EXISTS wirelessconfigs(
   creation_date timestamp,
   created_by varchar(40),
   tenant_id varchar(36) NOT NULL,
+  version text,
   PRIMARY KEY (wireless_profile_name, tenant_id)
 );
 CREATE TABLE IF NOT EXISTS profiles(
@@ -45,7 +47,8 @@ CREATE TABLE IF NOT EXISTS profiles(
   tags text[],
   dhcp_enabled BOOLEAN,
   tenant_id varchar(36) NOT NULL,
-  tls_mode integer NULL,    
+  tls_mode integer NULL,
+  version text,
   PRIMARY KEY (profile_name, tenant_id)
 );
 CREATE TABLE IF NOT EXISTS profiles_wirelessconfigs(
@@ -68,6 +71,7 @@ CREATE TABLE IF NOT EXISTS domains(
   creation_date timestamp,
   created_by varchar(40),
   tenant_id varchar(36) NOT NULL,
+  version text,
   CONSTRAINT domainsuffix UNIQUE(domain_suffix,tenant_id),
   PRIMARY KEY (name, tenant_id)
 );
