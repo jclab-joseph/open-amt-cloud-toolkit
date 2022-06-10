@@ -41,6 +41,17 @@ spec:
       containers:
         - name: mps
           image: {{ .Values.images.mps }}
+          args:
+          - /bin/sh
+          - -c
+          - touch /tmp/healthy; sleep 30; rm -f /tmp/healthy; sleep 600
+          readinessProbe:
+            exec:
+              command:
+              - cat
+              - /tmp/healthy
+            initialDelaySeconds: 5
+            periodSeconds: 5 
           env:
             - name: "MPS_LOG_LEVEL"
               value: "{{ .Values.mps.logLevel }}"   
